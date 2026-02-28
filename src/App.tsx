@@ -10,6 +10,8 @@ import { PanelOverlay } from "./components/PanelOverlay";
 import { PanelBackground } from "./components/PanelBackground";
 import { PanelExport } from "./components/PanelExport";
 import { PanelEffects } from "./components/PanelEffects";
+import { PanelVS } from "./components/Panelvs";
+import { PanelScene } from "./components/PanelScene";
 import type { CoinEngine } from "./lib/CoinEngine";
 
 type Tab =
@@ -19,6 +21,8 @@ type Tab =
   | "fx"
   | "overlay"
   | "effects"
+  | "vs"
+  | "scene"
   | "bg"
   | "export";
 
@@ -29,6 +33,8 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: "fx", label: "FX", icon: "✦" },
   { id: "overlay", label: "Overlay", icon: "▤" },
   { id: "effects", label: "Effects", icon: "❋" },
+  { id: "vs", label: "VS", icon: "⚔" },
+  { id: "scene", label: "Scene", icon: "⊞" },
   { id: "bg", label: "BG", icon: "◻" },
   { id: "export", label: "Export", icon: "↑" },
 ];
@@ -116,20 +122,34 @@ export default function App() {
         <PanelEffects
           confetti={st.confetti}
           chartAnim={st.chartAnim}
-          vs={st.vs}
-          vsChartData={st.vsChartData}
           onConfetti={(p) => st.setConfetti((c) => ({ ...c, ...p }))}
           onChartAnim={(p) => st.setChartAnim((a) => ({ ...a, ...p }))}
+          onRetraceChart={retraceChart}
+        />
+      )}
+      {tab === "vs" && (
+        <PanelVS
+          vs={st.vs}
+          vsChartData={st.vsChartData}
           onVs={(p) => st.setVs((v) => ({ ...v, ...p }))}
           onVsChartData={st.setVsChartData}
-          onRetraceChart={retraceChart}
+          onApplyRightPreset={st.applyVsRightPreset}
+        />
+      )}
+      {tab === "scene" && (
+        <PanelScene
+          scene={st.scene}
+          vsEnabled={st.vs.enabled}
+          onScene={(p) => st.setScene((s) => ({ ...s, ...p }))}
         />
       )}
       {tab === "bg" && (
         <PanelBackground
           bgColor={st.bgColor}
+          bgGradient={st.bgGradient}
           bgImg={st.bgImg}
           onBgColor={st.setBgColor}
+          onBgGradient={(p) => st.setBgGradient((g) => ({ ...g, ...p }))}
           onBgImg={st.setBgImg}
         />
       )}
@@ -189,7 +209,12 @@ export default function App() {
                 )}
                 {st.vs.enabled && (
                   <span className="text-xs text-blue-400 tracking-wide">
-                    VS mode
+                    ⚔ VS
+                  </span>
+                )}
+                {!st.vs.enabled && st.scene.coinCount > 1 && (
+                  <span className="text-xs text-violet-400 tracking-wide">
+                    ⊞ {st.scene.coinCount} coins
                   </span>
                 )}
                 {st.overlay.enabled && (
@@ -211,6 +236,7 @@ export default function App() {
               rotSpeed={st.rotSpeed}
               tiltX={st.tiltX}
               bgColor={st.bgColor}
+              bgGradient={st.bgGradient}
               bgImg={st.bgImg}
               overlay={st.overlay}
               chart={st.chart}
@@ -219,6 +245,7 @@ export default function App() {
               chartAnim={st.chartAnim}
               vs={st.vs}
               vsChartData={st.vsChartData}
+              scene={st.scene}
               onEngineReady={handleEngineReady}
             />
 
@@ -238,7 +265,7 @@ export default function App() {
             )}
           </div>
 
-          <div className="w-full max-w-lg rounded-lg border border-neutral-800/60 bg-neutral-900/30 px-4 py-3">
+          {/* <div className="w-full max-w-lg rounded-lg border border-neutral-800/60 bg-neutral-900/30 px-4 py-3">
             <p className="text-xs text-neutral-600 leading-relaxed">
               Token preset → logo → overlay → Effects tab for confetti &amp;
               chart animation → export.{" "}
@@ -246,11 +273,11 @@ export default function App() {
                 ffmpeg -r 30 -i coin_%04d.png coin.gif
               </code>
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* Desktop panel — elegant sidebar */}
-        <div className="flex flex-col border-l border-neutral-800/70 w-76 shrink-0 overflow-hidden">
+        <div className="flex flex-col border-l bg-neutral-800 border-neutral-800/70 w-76 shrink-0 overflow-hidden">
           {/* Tab strip — scrollable horizontal pills */}
           <div className="shrink-0 px-3 pt-3 pb-0 border-b border-neutral-800/70">
             <div className="flex flex-col gap-1 overflow-x-auto pb-3 scrollbar-none">
@@ -262,10 +289,10 @@ export default function App() {
                     ${
                       tab === t.id
                         ? "bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/30"
-                        : "text-neutral-500 hover:text-neutral-300 hover:bg-neutral-800/50"
+                        : "text-neutral-400 hover:text-neutral-300 hover:bg-neutral-800/50"
                     }`}
                 >
-                  <span className="text-[10px] opacity-70">{t.icon}</span>
+                  <span className="text-sm opacity-70">{t.icon}</span>
                   {t.label}
                 </button>
               ))}
@@ -307,7 +334,12 @@ export default function App() {
                     <span className="text-xs text-amber-500">✦ confetti</span>
                   )}
                   {st.vs.enabled && (
-                    <span className="text-xs text-blue-400">VS</span>
+                    <span className="text-xs text-blue-400">⚔ VS</span>
+                  )}
+                  {!st.vs.enabled && st.scene.coinCount > 1 && (
+                    <span className="text-xs text-violet-400">
+                      ⊞ {st.scene.coinCount}
+                    </span>
                   )}
                   {st.overlay.enabled && (
                     <span className="text-xs text-neutral-600">
@@ -328,6 +360,7 @@ export default function App() {
                 rotSpeed={st.rotSpeed}
                 tiltX={st.tiltX}
                 bgColor={st.bgColor}
+                bgGradient={st.bgGradient}
                 bgImg={st.bgImg}
                 overlay={st.overlay}
                 chart={st.chart}
@@ -336,6 +369,7 @@ export default function App() {
                 chartAnim={st.chartAnim}
                 vs={st.vs}
                 vsChartData={st.vsChartData}
+                scene={st.scene}
                 onEngineReady={handleEngineReady}
               />
 
@@ -389,12 +423,12 @@ export default function App() {
             )}
 
             {/* Tab bar — always visible */}
-            <div className="shrink-0 flex flex-col items-center gap-0 px-2 border-b border-neutral-800/60 overflow-x-auto scrollbar-none">
+            <div className="shrink-0 flex items-center gap-0 px-2 border-b border-neutral-800/60 overflow-x-auto scrollbar-none">
               {TABS.map((t) => (
                 <button
                   key={t.id}
                   onClick={() => handleTabClick(t.id)}
-                  className={`flex flex-col items-center gap-0.5 px-3 py-2.5 min-w-14 transition-all cursor-pointer shrink-0
+                  className={`flex flex-col items-center gap-0.5 px-3 py-2.5 min-w-[56px] transition-all cursor-pointer shrink-0
                     ${
                       tab === t.id && sheetOpen
                         ? "text-amber-400"

@@ -10,12 +10,14 @@ import type {
   OverlaySettings,
   ChartSettings,
   ChartData,
-  Timeframe,
+  BgGradient,
+  VsSettings,
+  SceneSettings,
 } from "../types";
 import { MATERIAL_PRESETS, TOKEN_PRESETS } from "../lib/presets";
 import { defaultConfetti } from "../lib/confetti";
 import { defaultChartAnim } from "../lib/chartAnim";
-import type { ConfettiSettings, ChartAnimSettings, VsSettings } from "../types";
+import type { ConfettiSettings, ChartAnimSettings } from "../types";
 
 const defaultCoin: CoinSettings = {
   color: "#d4900a",
@@ -29,6 +31,28 @@ const defaultCoin: CoinSettings = {
 const defaultLogo: LogoSettings = {
   svg: "",
   color: "#c8860b",
+  scale: 1,
+  depth: 0.07,
+  bevel: 0.008,
+  bevelSegs: 3,
+  metal: 0.6,
+  rough: 0.15,
+  opacity: 1,
+  smooth: 80,
+};
+// Right coin defaults to Ethereum preset
+const defaultRightCoin: CoinSettings = {
+  color: "#627eea",
+  metalness: 0.93,
+  roughness: 0.1,
+  opacity: 1,
+  thickness: 0.14,
+  rimWidth: 0.09,
+  rimStep: 0.018,
+};
+const defaultRightLogo: LogoSettings = {
+  svg: "",
+  color: "#ffffff",
   scale: 1,
   depth: 0.07,
   bevel: 0.008,
@@ -78,14 +102,36 @@ const defaultChart: ChartSettings = {
   lineW: 2,
   showPrice: true,
 };
-
 const defaultVs: VsSettings = {
   enabled: false,
+  cameraZoom: 1,
+  leftTokenName: "$BTC",
+  leftTagline: "Digital gold.",
+  leftChainBadge: "Bitcoin Network",
+  leftAccent: "#f7931a",
+  leftCoinId: "bitcoin",
   rightTokenId: "ethereum",
   rightCoinId: "ethereum",
+  rightTokenName: "$ETH",
+  rightTagline: "Programmable money.",
+  rightChainBadge: "Ethereum Mainnet",
+  rightAccent: "#a0b4ff",
+  rightCoin: defaultRightCoin,
+  rightLogo: defaultRightLogo,
   label: "VS",
   dividerColor: "#ffffff",
-  sharedChart: false,
+};
+const defaultScene: SceneSettings = {
+  coinCount: 1,
+  layout: "row",
+  cameraZoom: 1,
+  phaseOffset: true,
+};
+const defaultBgGradient: BgGradient = {
+  mode: "solid",
+  colorA: "#1a0a2e",
+  colorB: "#000000",
+  angle: 135,
 };
 
 export function useAppState() {
@@ -102,11 +148,13 @@ export function useAppState() {
     useState<ChartAnimSettings>(defaultChartAnim());
   const [vs, setVs] = useState<VsSettings>(defaultVs);
   const [vsChartData, setVsChartData] = useState<ChartData | null>(null);
+  const [scene, setScene] = useState<SceneSettings>(defaultScene);
   const [renderStyle, setRenderStyle] = useState<RenderStyle>("pbr");
   const [rotMode, setRotMode] = useState<RotationMode>("y");
   const [rotSpeed, setRotSpeed] = useState(0.8);
   const [tiltX, setTiltX] = useState(18);
   const [bgColor, setBgColor] = useState("#000000");
+  const [bgGradient, setBgGradient] = useState<BgGradient>(defaultBgGradient);
   const [bgImg, setBgImg] = useState<HTMLImageElement | null>(null);
   const [materialPreset, setMaterialPreset] = useState("gold");
   const [tokenPreset, setTokenPreset] = useState("custom");
@@ -149,11 +197,7 @@ export function useAppState() {
       rimIntensity: m.rimIntensity,
       exposure: m.exposure,
     });
-    setLogo((l) => ({
-      ...l,
-      color: "#ffffff", // ← white logo for all presets
-      svg: t.svg, // ← auto-load the preset SVG
-    }));
+    setLogo((l) => ({ ...l, color: "#ffffff", svg: (t as any).svg ?? l.svg }));
     setOverlay((o) => ({
       ...o,
       tokenName: t.ticker,
@@ -163,6 +207,33 @@ export function useAppState() {
       badgeBg: t.overlayBadgeBg,
     }));
     if (t.coinGeckoId) setChart((c) => ({ ...c, coinId: t.coinGeckoId }));
+  }, []);
+
+  // Apply a token preset to the VS right slot
+  const applyVsRightPreset = useCallback((id: string) => {
+    const t = TOKEN_PRESETS.find((p) => p.id === id);
+    if (!t) return;
+    const m = t.material;
+    setVs((v) => ({
+      ...v,
+      rightTokenId: id,
+      rightCoinId: t.coinGeckoId,
+      rightTokenName: t.ticker,
+      rightTagline: t.tagline,
+      rightChainBadge: t.chain,
+      rightAccent: t.overlayAccent,
+      rightCoin: {
+        ...v.rightCoin,
+        color: m.coinColor,
+        metalness: m.metalness,
+        roughness: m.roughness,
+      },
+      rightLogo: {
+        ...v.rightLogo,
+        color: "#ffffff",
+        svg: (t as any).svg ?? v.rightLogo.svg,
+      },
+    }));
   }, []);
 
   return {
@@ -192,6 +263,8 @@ export function useAppState() {
     setTiltX,
     bgColor,
     setBgColor,
+    bgGradient,
+    setBgGradient,
     bgImg,
     setBgImg,
     materialPreset,
@@ -204,11 +277,13 @@ export function useAppState() {
     setChartAnim,
     vs,
     setVs,
+    applyVsRightPreset,
     vsChartData,
     setVsChartData,
+    scene,
+    setScene,
   };
 }
 
-// ── Re-exported for convenience ──
 export { defaultConfetti } from "../lib/confetti";
 export { defaultChartAnim } from "../lib/chartAnim";

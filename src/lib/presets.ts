@@ -78,9 +78,12 @@ export const TOKEN_PRESETS: TokenPreset[] = [
     coinGeckoId: "bitcoin",
     overlayAccent: "#f7931a",
     overlayBadgeBg: "#f7931a",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <path d="M63.5,46.5c1.8-1.2,3-3.1,3-5.5c0-4.5-3.5-7.5-8.5-8l0-7h-5l0,6.8H48l0-6.8h-5l0,6.8h-9v5h3.5c1.4,0,2.5,1.1,2.5,2.5v19c0,1.4-1.1,2.5-2.5,2.5H34v5h9V74h5v-6.8h5V74h5v-7.1c5.5-0.7,9.5-3.9,9.5-9C67.5,54.5,65.3,51.5,63.5,46.5z M45,40h8c2.8,0,5,1.1,5,3.5S55.8,47,53,47h-8V40z M54,62H45v-8h9c3.1,0,5.5,1.2,5.5,4S57.1,62,54,62z"/>
-    </svg>`,
+    svg: `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+	<style type="text/css">
+		.st0{fill:#F39321;}
+	</style>
+	<path class="st0" d="M76.5 52.9c2.1-1.1 4.1-1.8 5.7-3.2 6.1-5.5 7.8-18.3-2.2-24.5-3.1-1.9-6.4-3.4-10-4.8.6-4.8 2.5-9.2 3.1-14.1-2.9-.7-5.7-1.7-8.5-2-1.2 4.6-2.3 9-3.5 13.5-2.2-.7-4.5-.6-6.5-1.8.7-4.7 2.5-9 3-13.7-3-.5-5.6-1.6-8.5-1.8-1.2 4.6-2.3 9-3.4 13.7-5.8-.9-11.1-2.9-17-4-1.3 2.9-1.9 5.9-2.4 9.2 1.9.5 3.6.8 5.2 1.2 4.2 1 5.3 3.3 4.3 6.9-.7 2.6-1.3 5.2-2 7.9-2.3 9.4-4.7 18.9-7 28.3-.5 2.1-1.9 2.8-4 2.5-2.1-.3-4.1-1.3-6.5-1.2-1 3.2-3 6.1-3.7 9.7 5.6 1.4 11 2.8 16.6 4.2-.4 4.9-2.5 9.4-3.1 14.4 2.8.7 5.5 1.3 8.3 2 1.8-4.5 2.3-9.3 4-14 2.1 1.1 4.3.7 6.3 2.1-1.1 4.5-2.2 9-3.3 13.6 2.9 1 5.7 1.5 8.7 2.2 1.2-4.7 2.3-9.3 3.4-13.7.7-.4 1.2-.3 1.7-.2 4.6 1 9.2 1.2 13.8.7 4-.4 7.6-2 10.4-5 3.2-3.3 4.8-7.4 5.5-11.8.6-3.6.5-7.2-1.6-10.4C81.8 56.4 79.5 54.5 76.5 52.9zM67.2 68.1c-1 3.2-3.3 4.8-6.5 5.3-5.9 1.1-11.5-.4-17.2-1.8-.7-.2-1.4-.4-2.4-.7 1.5-6.2 3-12.2 4.5-18.4 4 .3 7.7 1.5 11.3 2.7 3.1 1.1 6 2.3 8.3 4.8C67.5 62.4 68 65.1 67.2 68.1zM69.9 40.3c-.8 2.8-3.3 4.9-6.5 5.3-5.2.7-10.1-.7-15.5-2.1 1.4-5.6 2.7-11.1 4.1-16.6 1.7-.5 3.1.3 4.5.6 3.7.8 7.4 2 10.5 4.3C69.8 33.9 70.8 36.9 69.9 40.3z" />
+</svg>`,
     material: {
       id: "btc",
       label: "Bitcoin",
@@ -104,10 +107,14 @@ export const TOKEN_PRESETS: TokenPreset[] = [
     coinGeckoId: "ethereum",
     overlayAccent: "#a0b4ff",
     overlayBadgeBg: "#627eea",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <path d="M50,15 L27,51 L50,63 L73,51 Z"/>
-      <path d="M50,68 L27,54 L50,85 L73,54 Z"/>
-    </svg>`,
+    svg: `<svg version="1.1" id="Layer_2_00000021100155478670109350000010533719273711878307_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+	<style type="text/css">
+		.st0{fill:#131313;}
+	.st1{fill:#828384;}
+	</style>
+	<path d="M250 6.6 102.4 251.1 250 341.3 398 251.1Z" class="st0" />
+	<path d="M250 372.3 102.4 284.6 250 493.1 398 284.6Z" class="st1" />
+</svg>`,
     material: {
       id: "eth",
       label: "Ethereum",
@@ -131,11 +138,14 @@ export const TOKEN_PRESETS: TokenPreset[] = [
     coinGeckoId: "solana",
     overlayAccent: "#14f195",
     overlayBadgeBg: "#9945ff",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <path d="M22,65h47.5c0.8,0,1.5,0.3,2.1,0.9l6.4,6.4c0.9,0.9,0.3,2.7-1,2.7H29.5c-0.8,0-1.5-0.3-2.1-0.9l-6.4-6.4C20.1,66.8,20.7,65,22,65z"/>
-      <path d="M22,24h47.5c0.8,0,1.5,0.3,2.1,0.9l6.4,6.4c0.9,0.9,0.3,2.7-1,2.7H29.5c-0.8,0-1.5-0.3-2.1-0.9l-6.4-6.4C20.1,25.8,20.7,24,22,24z"/>
-      <path d="M78,44.5H30.5c-0.8,0-1.5-0.3-2.1-0.9l-6.4-6.4c-0.9-0.9-0.3-2.7,1-2.7h47.5c0.8,0,1.5,0.3,2.1,0.9l6.4,6.4C79.9,42.7,79.3,44.5,78,44.5z" transform="translate(0,12)"/>
-    </svg>`,
+    svg: `<svg version="1.1" id="sol" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+	<style type="text/css">
+		.st0{fill-rule:evenodd;clip-rule:evenodd;}
+	</style>
+	<path class="st0" d="M22.5 205.7h392.2c4.9 0 9.5 1.9 12.9 5.4l62 62.4c11.5 11.5 3.4 31.2-12.9 31.2H84.5c-4.9 0-9.5-1.9-12.9-5.4l-62-62.4C-1.9 225.5 6.2 205.7 22.5 205.7z" />
+	<path class="st0" d="M9.5 123l62-62.4c3.6-3.6 8.1-5.4 12.9-5.4h392c16.3 0 24.6 19.7 12.9 31.2l-61.9 62.4c-3.4 3.6-8.1 5.4-12.9 5.4h-392C6.2 154.2-1.9 134.5 9.5 123z" />
+	<path class="st0" d="M489.4 387.7l-62 62.5c-3.4 3.4-8.1 5.4-12.9 5.4h-392c-16.3 0-24.4-19.7-13.1-31.2l62-62.5c3.6-3.4 8.1-5.4 12.9-5.4h392C492.8 356.4 501.1 376 489.4 387.7z" />
+</svg>`,
     material: {
       id: "sol",
       label: "Solana",
@@ -159,9 +169,9 @@ export const TOKEN_PRESETS: TokenPreset[] = [
     coinGeckoId: "algorand",
     overlayAccent: "#00b4d8",
     overlayBadgeBg: "#0077b6",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <path d="M 36 80 L 46 45 L 38 45 L 48 10 L 58 10 L 50 40 L 58 40 L 64 20 L 74 20 L 66 45 L 74 45 L 64 80 Z"/>
-    </svg>`,
+    svg: `<svg version="1.1" id="ALGO" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+	<path d="M99.7 99.8H84.2L74 62.1 52.3 99.8H34.9l33.6-58.3-5.4-20.3L17.7 99.8H.3L57.8.2h15.3L79.7 25h15.7L84.7 43.6 99.7 99.8z" />
+</svg>`,
     material: {
       id: "algo",
       label: "Algorand",
@@ -185,9 +195,11 @@ export const TOKEN_PRESETS: TokenPreset[] = [
     coinGeckoId: "avalanche-2",
     overlayAccent: "#ff8c8c",
     overlayBadgeBg: "#e84142",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <path d="M50,18 L82,78 H62 L50,56 L38,78 H18 Z"/>
-    </svg>`,
+    svg: `<svg version="1.1" id="avax" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+	<path class="st1" d="M338.2 256.5c8.7-15 22.6-15 31.3 0l53.9 94.7c8.7 15 1.6 27.2-15.7 27.2H299c-17.1 0-24.2-12.2-15.7-27.2L338.2 256.5z" />
+	<path class="st1" d="M233.9 74.2c8.7-15 22.4-15 31.1 0l12 21.7 28.3 49.8c6.9 14.2 6.9 30.9 0 45.1l-95.1 164.8c-8.7 13.4-23 21.9-39 22.8H92.3c-17.3 0-24.4-12-15.7-27.2L233.9 74.2z" />
+</svg>`,
     material: {
       id: "avax",
       label: "Avalanche",
@@ -211,9 +223,12 @@ export const TOKEN_PRESETS: TokenPreset[] = [
     coinGeckoId: "chainlink",
     overlayAccent: "#6fa8f5",
     overlayBadgeBg: "#375bd2",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <path d="M50,12 L62,19 L62,19 L74,26 L74,50 L74,74 L62,81 L50,88 L38,81 L26,74 L26,50 L26,26 L38,19 Z M50,30 L38,37 L38,63 L50,70 L62,63 L62,37 Z"/>
-    </svg>`,
+    svg: `<svg version="1.1" id="LINK" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+
+<path class="st0" d="M250,6l-44.8,25.7l-122,70.5L38.5,128v244l44.8,25.7l123.1,70.5l44.8,25.7l44.8-25.7l120.9-70.5l44.8-25.7V128
+	l-44.8-25.7l-122-70.5C294.8,31.8,250,6,250,6z M128,320.5v-141L250,109l122,70.5v141L250,391L128,320.5z"/>
+</svg>`,
     material: {
       id: "link",
       label: "Chainlink",
@@ -271,6 +286,6 @@ export const EXPORT_RESOLUTIONS = [
 
 export const ASPECT_RATIOS = [
   { value: "1:1", label: "1:1", hint: "Square" },
-  { value: "9:16", label: "9:16", hint: "Story" },
-  { value: "16:9", label: "16:9", hint: "Banner" },
+  // { value: "9:16", label: "9:16", hint: "Story" },
+  // { value: "16:9", label: "16:9", hint: "Banner" },
 ];

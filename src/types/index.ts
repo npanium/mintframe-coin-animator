@@ -2,8 +2,11 @@ export type RenderStyle = "pbr" | "flat" | "cel" | "clay";
 export type RotationMode = "y" | "x" | "z" | "xy" | "drag";
 export type ChartMode = "bg" | "side";
 export type Timeframe = "1h" | "1d" | "7d" | "30d";
-export type AspectRatio = "1:1" | "9:16" | "16:9";
+// export type AspectRatio = "1:1" | "9:16" | "16:9";
+export type AspectRatio = "1:1";
 export type ExportResolution = "720" | "1080" | "2160";
+export type BgMode = "solid" | "linear" | "radial" | "mesh";
+export type CoinLayout = "row" | "arc" | "circle" | "grid";
 
 export interface CoinSettings {
   color: string;
@@ -105,10 +108,18 @@ export interface TokenPreset {
   tagline: string;
   chain: string;
   coinGeckoId: string;
-  svg: string;
+  svg?: string;
   material: MaterialPreset;
   overlayAccent: string;
   overlayBadgeBg: string;
+}
+
+// ── Background gradient ───────────────────────────────────────────
+export interface BgGradient {
+  mode: BgMode;
+  colorA: string;
+  colorB: string;
+  angle: number;
 }
 
 // ── Confetti ──────────────────────────────────────────────────────
@@ -117,7 +128,6 @@ export type ConfettiPresetId = "gold" | "moon" | "diamond" | "fire" | "custom";
 export interface ConfettiSettings {
   enabled: boolean;
   preset: ConfettiPresetId;
-  // advanced
   particleCount: number;
   speed: number;
   spread: number;
@@ -126,7 +136,7 @@ export interface ConfettiSettings {
   colors: string[];
   shapes: ("circle" | "rect" | "diamond" | "star")[];
   fadeOut: boolean;
-  burst: boolean; // one-shot burst vs continuous rain
+  burst: boolean;
 }
 
 // ── Chart animation ───────────────────────────────────────────────
@@ -139,20 +149,41 @@ export type ChartAnimPresetId =
 
 export interface ChartAnimSettings {
   preset: ChartAnimPresetId;
-  // advanced
-  duration: number; // seconds for full retrace (0 = instant)
+  duration: number;
   easing: "linear" | "ease-in" | "ease-out" | "bounce";
   trailGlow: boolean;
-  trailLength: number; // 0-1, how much of the tail stays bright
-  dotPulse: boolean; // pulsing dot at draw head
+  trailLength: number;
+  dotPulse: boolean;
 }
 
-// ── VS Mode ───────────────────────────────────────────────────────
+// ── VS Mode — strictly 2 coins, each independent ─────────────────
 export interface VsSettings {
   enabled: boolean;
+  cameraZoom: number;
+  // Left overlay text (coin appearance driven by main Coin/Logo tabs)
+  leftTokenName: string;
+  leftTagline: string;
+  leftChainBadge: string;
+  leftAccent: string;
+  leftCoinId: string;
+  // Right coin — fully independent appearance + overlay
   rightTokenId: string;
-  rightCoinId: string; // coingecko id for right chart
-  label: string; // "VS" divider label
+  rightCoinId: string;
+  rightTokenName: string;
+  rightTagline: string;
+  rightChainBadge: string;
+  rightAccent: string;
+  rightCoin: CoinSettings;
+  rightLogo: LogoSettings;
+  // Divider
+  label: string;
   dividerColor: string;
-  sharedChart: boolean; // one chart spanning both, or two separate
+}
+
+// ── Scene Mode — multi-coin layout ───────────────────────────────
+export interface SceneSettings {
+  coinCount: number; // 1–7
+  layout: CoinLayout; // row | arc | circle | grid
+  cameraZoom: number;
+  phaseOffset: boolean; // stagger spin vs lockstep
 }
